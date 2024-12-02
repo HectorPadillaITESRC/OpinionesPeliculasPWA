@@ -11,7 +11,7 @@ using OpinionesPeliculasPWA.Models.Entities;
 namespace OpinionesPeliculasPWA.Migrations
 {
     [DbContext(typeof(OpinionespeliculasContext))]
-    [Migration("20241126233844_BdInicial")]
+    [Migration("20241202231134_BdInicial")]
     partial class BdInicial
     {
         /// <inheritdoc />
