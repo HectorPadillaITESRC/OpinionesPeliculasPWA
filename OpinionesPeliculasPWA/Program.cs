@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 using OpinionesPeliculasPWA.Models.Entities;
 using OpinionesPeliculasPWA.Repositories;
 
@@ -21,7 +23,11 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<OpinionespeliculasContext>();
-    db.Database.Migrate();
+
+    if (!db.Database.GetService<IRelationalDatabaseCreator>().Exists())
+    {
+        db.Database.Migrate();
+    }
 }
 
 
