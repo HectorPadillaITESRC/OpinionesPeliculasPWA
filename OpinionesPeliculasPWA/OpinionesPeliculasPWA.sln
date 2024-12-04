@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpinionesPeliculasPWA", "OpinionesPeliculasPWA.csproj", "{68733EFC-2E1D-4E30-B510-770C15AEFEDE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{68733EFC-2E1D-4E30-B510-770C15AEFEDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68733EFC-2E1D-4E30-B510-770C15AEFEDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68733EFC-2E1D-4E30-B510-770C15AEFEDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68733EFC-2E1D-4E30-B510-770C15AEFEDE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9D752D69-66E7-45AF-8B48-89FF906E26D7}
+	EndGlobalSection
+EndGlobal
