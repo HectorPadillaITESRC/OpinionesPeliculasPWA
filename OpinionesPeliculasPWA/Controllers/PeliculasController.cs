@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.JSInterop.Implementation;
+using OpinionesPeliculasPWA.Helpers;
 using OpinionesPeliculasPWA.Models.Dtos;
 using OpinionesPeliculasPWA.Models.Entities;
 using OpinionesPeliculasPWA.Repositories;
@@ -8,18 +10,24 @@ namespace OpinionesPeliculasPWA.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class HomeController : ControllerBase
+    public class PeliculasController : ControllerBase
     {
         private readonly Repository<Peliculas> repository;
-        public HomeController(Repository<Peliculas> repository)
+        public PeliculasController(Repository<Peliculas> repository)
         {
             this.repository = repository;
         }
         public IActionResult Get()
         {
-            var pelis = repository.GetAll();
+            var pelis = repository.GetAll().Select(x=> new MovieDto
+            {
+                Id=x.Id,
+                Portada = ImageToBase64.ConvertBase64($"wwwroot/images/{x.Id}.jpg"),
+                Title = x.Nombre
+            });
             if (pelis != null)
             {
+
                 return Ok(pelis);
             }
             return BadRequest("No hay peliculas");
@@ -28,9 +36,16 @@ namespace OpinionesPeliculasPWA.Controllers
         public IActionResult Get(int id)
         {
             var pelis = repository.Get(id);
+
             if (pelis != null)
             {
-                return Ok(pelis);
+                var pelidto = new MovieDto
+                {
+                    Id = pelis.Id,
+                    Portada = ImageToBase64.ConvertBase64($"wwwroot/images/{pelis.Id}.jpg"),
+                    Title = pelis.Nombre
+                };
+                return Ok();
             }
             return BadRequest("No hay peliculas");
         }
@@ -44,12 +59,22 @@ namespace OpinionesPeliculasPWA.Controllers
                 {
                     return BadRequest("Ingrese un titulo");
                 }
-                // falta agregar la imagen de la pelicula ponganlo en wwwroot mancos
+               
                 Peliculas peli = new()
                 {
                     Nombre = dto.Title
                 };
                 repository.Insert(peli);
+                if (string.IsNullOrEmpty(dto.Portada))
+                {
+                    System.IO.File.Copy("wwwroot/images/Default.png", $"wwwroot/images/{peli.Id}.jpg");
+                }
+                else
+                {
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", $"{peli.Id}.jpg");
+                    var bytes = Convert.FromBase64String(dto.Portada);
+                    System.IO.File.WriteAllBytes(path, bytes);
+                }
                 return Ok();
             }
             catch (Exception ex)
@@ -73,7 +98,16 @@ namespace OpinionesPeliculasPWA.Controllers
                 {
                     peli.Nombre = dto.Title;
                     repository.Update(peli);
-
+                    if (string.IsNullOrEmpty(dto.Portada))
+                    {
+                        System.IO.File.Copy("wwwroot/images/Default.jpg", $"wwwroot/images/{peli.Id}.jpg");
+                    }
+                    else
+                    {
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", $"{peli.Id}.jpg");
+                        var bytes = Convert.FromBase64String(dto.Portada);
+                        System.IO.File.WriteAllBytes(path, bytes);
+                    }
                     return Ok();
                 }
                 else
