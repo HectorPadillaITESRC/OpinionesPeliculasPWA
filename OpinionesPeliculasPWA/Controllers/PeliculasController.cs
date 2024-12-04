@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.JSInterop.Implementation;
 using OpinionesPeliculasPWA.Helpers;
@@ -8,6 +9,7 @@ using OpinionesPeliculasPWA.Repositories;
 
 namespace OpinionesPeliculasPWA.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class PeliculasController : ControllerBase

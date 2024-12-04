@@ -30,8 +30,9 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-
 app.MapControllers();
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapRazorPages();
 app.UseStaticFiles();
 
