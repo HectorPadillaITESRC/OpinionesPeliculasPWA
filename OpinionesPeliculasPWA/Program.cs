@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
+using OpinionesPeliculasPWA.Helpers;
 using OpinionesPeliculasPWA.Models.Entities;
 using OpinionesPeliculasPWA.Repositories;
 
@@ -13,6 +14,10 @@ builder.Services.AddDbContext<OpinionespeliculasContext>(x =>
 x.UseMySql(cs, MySqlServerVersion.AutoDetect(cs)));
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddTransient<RepoUser>();
+builder.Services.AddTransient<TokenGenerator>();
+builder.Services.AddTransient<Repository<Usuarios>>();
+builder.Services.AddTransient<Repository<Tokens>>();
 
 
 builder.Services.AddRazorPages();

@@ -1,13 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OpinionesPeliculasPWA.Models.Entities;
 
 namespace OpinionesPeliculasPWA.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        protected readonly DbContext _context;
+        protected readonly OpinionespeliculasContext _context;
         protected readonly DbSet<T> _dbSet;
 
-        public Repository(DbContext context)
+        public Repository(OpinionespeliculasContext context)
         {
             _context = context;
             _dbSet = context.Set<T>();

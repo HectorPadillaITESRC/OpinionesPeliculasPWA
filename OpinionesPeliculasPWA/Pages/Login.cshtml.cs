@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using OpinionesPeliculasPWA.Models.DTOs;
+using OpinionesPeliculasPWA.Repositories;
 
 namespace OpinionesPeliculasPWA.Pages
 {
     public class Login : PageModel
     {
-        private readonly ILogger<Login> _logger;
-
-        public Login(ILogger<Login> logger)
+        public Login()
         {
-            _logger = logger;
+            
         }
 
         public void OnGet()
